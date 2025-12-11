@@ -4,7 +4,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Abigail & Rathin's Wedding</title>
+	<title>Abigail & Rathin</title>
+
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
 
 	<!-- TAILWIND CSS (No installation needed) -->
 	<script src="https://cdn.tailwindcss.com"></script>
@@ -72,6 +74,11 @@
         from { transform: rotate(360deg); }
         to { transform: rotate(0deg); }
     }
+
+    @keyframes move-on-path {
+        from { offset-distance: 0%; }
+        to { offset-distance: 100%; }
+    }
 </style>
 	<script type="importmap">
 </script>
@@ -133,40 +140,57 @@
 	<main class="flex-grow w-full">
 
 
+
 <!-- ============================================ -->
-<!-- HERO SECTION  -->
+<!-- HERO SECTION (Circular Orbits) -->
 <!-- ============================================ -->
-<section id="hero" class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#4A6C9B] pt-20">
+<!-- 🎨 BACKGROUND: Updated to the lighter gradient you requested -->
+<section id="hero" class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#5F83B9] to-[#4A6C9B] pt-20">
 
     <!-- 🌌 ORBIT CONTAINER -->
     <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
         
-        <!-- RING 1: INNER (Smallest) -->
-        <div class="absolute rounded-full border border-white/5 opacity-80
-                    w-[360px] h-[360px] md:w-[900px] md:h-[900px]"
-             style="animation: orbit-cw 30s linear infinite; animation-delay: -5s;">
-            <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-28 md:w-40"
-                 style="animation: orbit-ccw 30s linear infinite; animation-delay: -5s;"> 
+        <!-- RING 1: INNER -->
+        <!-- 
+           🟢 EDIT RING OPACITY: Change 'border-white/10' below. 
+           /10 = 10% opacity, /20 = 20%, etc.
+        -->
+        <div class="absolute rounded-full border border-white/5
+                    w-[360px] h-[360px] md:w-[900px] md:h-[900px]">
+            
+            <!-- 
+               🐱 EDIT CAT OPACITY: Change 'opacity-100' below.
+               opacity-90 = 90%, opacity-50 = 50%, etc.
+            -->
+            <div class="absolute w-20 md:w-40 opacity-90"
+                 style="offset-path: ellipse(50% 50% at 50% 50%); 
+                        offset-rotate: 0deg; 
+                        animation: move-on-path 30s linear infinite;
+                        animation-delay: -5s;"> 
                 <img id="ring1-img" src="" class="w-full drop-shadow-2xl transform hover:scale-110 transition-transform duration-300 hidden" alt="Random Cat 1">
             </div>
         </div>
 
         <!-- RING 2: MIDDLE -->
-        <div class="absolute rounded-full border border-white/5 opacity-80
-                    w-[500px] h-[500px] md:w-[1150px] md:h-[1150px]"
-             style="animation: orbit-cw 45s linear infinite reverse; animation-delay: -20s;"> 
-            <div class="absolute top-1/2 -left-10 -translate-y-1/2 w-32 md:w-44"
-                 style="animation: orbit-ccw 45s linear infinite reverse; animation-delay: -20s;">
+        <div class="absolute rounded-full border border-white/5
+                    w-[500px] h-[500px] md:w-[1150px] md:h-[1150px]"> 
+            <div class="absolute w-24 md:w-44 opacity-90"
+                 style="offset-path: ellipse(50% 50% at 50% 50%); 
+                        offset-rotate: 0deg; 
+                        animation: move-on-path 45s linear infinite reverse;
+                        animation-delay: -20s;">
                 <img id="ring2-img" src="" class="w-full drop-shadow-2xl transform hover:scale-110 transition-transform duration-300 hidden" alt="Random Cat 2">
             </div>
         </div>
 
-        <!-- RING 3: OUTER (Largest) -->
-        <div class="absolute rounded-full border border-white/5 opacity-80
-                    w-[650px] h-[650px] md:w-[1400px] md:h-[1400px]"
-             style="animation: orbit-cw 60s linear infinite; animation-delay: -10s;">
-            <div class="absolute bottom-20 right-20 w-36 md:w-48"
-                 style="animation: orbit-ccw 60s linear infinite; animation-delay: -10s;">
+        <!-- RING 3: OUTER -->
+        <div class="absolute rounded-full border border-white/5
+                    w-[650px] h-[650px] md:w-[1400px] md:h-[1400px]">
+            <div class="absolute w-28 md:w-48 opacity-90"
+                 style="offset-path: ellipse(50% 50% at 50% 50%); 
+                        offset-rotate: 0deg; 
+                        animation: move-on-path 60s linear infinite;
+                        animation-delay: -10s;">
                 <img id="ring3-img" src="" class="w-full drop-shadow-2xl transform hover:scale-110 transition-transform duration-300 hidden" alt="Random Cat 3">
             </div>
         </div>
@@ -189,29 +213,28 @@
     <!-- 🎲 RANDOM CAT SCRIPT -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. POOL OF IMAGES (Generated by Python)
             const stickerImages = [
-    "./images/stickers/09D38C96-2252-47F3-88B2-0858CEE834A6_birefnet.png",
-    "./images/stickers/IMG_0552_inspyrenet.png",
-    "./images/stickers/IMG_0591_birefnet.png",
-    "./images/stickers/IMG_1268_inspyrenet.png",
-    "./images/stickers/IMG_2003_inspyrenet.png",
-    "./images/stickers/IMG_2467_birefnet.png",
-    "./images/stickers/IMG_2503_birefnet.png",
-    "./images/stickers/IMG_2973_inspyrenet.png",
-    "./images/stickers/IMG_3274_inspyrenet.png",
-    "./images/stickers/IMG_4757_birefnet.png",
-    "./images/stickers/IMG_5776_birefnet.png",
-    "./images/stickers/IMG_5969_inspyrenet.png",
-    "./images/stickers/IMG_7910_inspyrenet.png",
-    "./images/stickers/IMG_8375.png"
-];
+                "./images/stickers/09D38C96-2252-47F3-88B2-0858CEE834A6_birefnet.png",
+                "./images/stickers/IMG_0552_inspyrenet.png",
+                "./images/stickers/IMG_0591_birefnet.png",
+                "./images/stickers/IMG_1268_inspyrenet.png",
+                "./images/stickers/IMG_2003_inspyrenet.png",
+                "./images/stickers/IMG_2467_birefnet.png",
+                "./images/stickers/IMG_2503_birefnet.png",
+                "./images/stickers/IMG_2973_inspyrenet.png",
+                "./images/stickers/IMG_3274_inspyrenet.png",
+                "./images/stickers/IMG_4757_birefnet.png",
+                "./images/stickers/IMG_5776_birefnet.png",
+                "./images/stickers/IMG_5969_inspyrenet.png",
+                "./images/stickers/IMG_7910_inspyrenet.png",
+                "./images/stickers/IMG_8375.png"
+            ];
 
-            // 2. SHUFFLE & SELECT 3
+            // SHUFFLE & SELECT 3
             const shuffled = stickerImages.sort(() => 0.5 - Math.random());
             const selected = shuffled.slice(0, 3); 
 
-            // 3. ASSIGN TO RINGS
+            // ASSIGN TO RINGS
             const img1 = document.getElementById('ring1-img');
             const img2 = document.getElementById('ring2-img');
             const img3 = document.getElementById('ring3-img');
@@ -223,7 +246,7 @@
     </script>
 </section>
 
-		<!-- ============================================ 
+<!-- ============================================ 
 		RSVP SECTION -- HAVE TO DO LATER
 
         <section id="rsvp" class="py-20 px-6 scroll-mt-20">
@@ -531,13 +554,12 @@
 						</div>
 						<p class="text-text-muted/80 mt-2 italic">710 South Marquette Avenue, Minneapolis, MN 55402</p>
 						<p class="text-text-muted mt-4 leading-relaxed">
-							We have reserved a block of rooms at a special rate. Please mention the "Abigail Hindson &
-							Rathin Kacham Wedding" when booking or use the link below. Book by July 14th to secure the
-							discounted rate.
+							We have reserved a block of rooms at a special rate. Please call in to book and mention the "Abigail Hindson &
+							Rathin Kacham Wedding". Book by July 14th to secure the discounted rate.
 						</p>
-						<a href="#"
+						<a href="tel:+1-612-333-4545"
 							class="inline-flex mt-6 h-10 px-6 items-center justify-center rounded-full bg-background/40 text-text-main text-sm font-bold hover:bg-background/60 transition-colors border border-primary/20">
-							Book Now
+							612-333-4545
 						</a>
 					</div>
 
@@ -555,6 +577,23 @@
 							Visit Website
 						</a>
 					</div>
+
+					<!-- Hotel Option 3 -->
+					<div
+						class="bg-surface p-8 rounded-xl shadow-lg border border-primary/10 hover:border-primary/30 transition-colors">
+						<div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-4">
+							<h3 class="text-2xl font-display text-text-main font-bold">Airbnb</h3>
+						</div>
+						<p class="text-text-muted mt-4 leading-relaxed">
+							For our friends who'd like more space or want to explore different neighborhoods, we recommend checking out Airbnb for a variety of options in and around Minneapolis. 
+							Some of our favorite areas with great food and fun include Uptown/the Wedge, Northeast, and Seward/Longfellow.
+						</p>
+						<a href="tel:+1-612-333-4545"
+							class="inline-flex mt-6 h-10 px-6 items-center justify-center rounded-full bg-background/40 text-text-main text-sm font-bold hover:bg-background/60 transition-colors border border-primary/20">
+							Airbnb.com
+						</a>
+					</div>
+
 				</div>
 
 				<!-- DIVIDER -->
@@ -769,7 +808,7 @@
 		<div class="flex flex-col gap-2 items-center justify-center">
 			<h3 class="text-2xl font-display font-bold text-text-main">Abigail & Rathin</h3>
 			<p class="text-text-muted">August 15th, 2026</p>
-			<p class="text-text-muted/60 text-sm mt-4">With love</p>
+			<p class="text-text-muted/60 text-sm mt-4">With love!</p>
 		</div>
 	</footer>
 
